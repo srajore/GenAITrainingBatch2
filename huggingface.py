@@ -1,12 +1,15 @@
-from langchain_community.llms import huggingface_hub
+from langchain_huggingface import HuggingFaceEndpoint
 
-
-llm_huggingface=huggingface_hub.HuggingFaceHub(
-    repo_id="meta-llama/Llama-3.2-1B",
-    model_kwargs={"temperature": 0.2, "max_length": 64},
+# Initialize the HuggingFace model endpoint with parameters specified directly
+llm_huggingface = HuggingFaceEndpoint(
+    repo_id="HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    temperature=1.0,  # Specify temperature directly
+    max_length=64,    # Specify max_length directly
     huggingfacehub_api_token="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"
 )
 
-output=llm_huggingface.invoke("What is Generative AI")
+# Invoke the model with a prompt
+output = llm_huggingface.invoke("What is Generative AI")
 
+# Print the output
 print(output)
