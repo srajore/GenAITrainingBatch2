@@ -4,8 +4,14 @@ from langchain_openai import OpenAI
 
 from dotenv import load_dotenv
 
+import streamlit as st 
+
 
 def main():
+
+  st.title("Prompt Template Demo !")
+
+  user_input= st.text_input("Please enter your name")
   
   load_dotenv(".env",override=True)
 
@@ -15,7 +21,7 @@ def main():
 
   chain=prompt|llm
 
-  response=chain.invoke({"name":"Rohit Sharma"})
+  response=chain.invoke({"name": user_input})
 
   print(response)
 

@@ -1,17 +1,23 @@
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import PromptTemplate
 
-from langchain_openai import OpenAI
+from langchain_openai import AzureOpenAI
 
 from dotenv import load_dotenv
+
+import os
 
 
 def main():
   
   load_dotenv(".env",override=True)
 
-  prompt=ChatPromptTemplate.from_template("Tell me key achivments of {name} in 4 bulleted points")
+  endpoint=os.environ["AZURE_OPENAI_ENDPOINT"]
 
-  llm=OpenAI()
+  print("Azure OpenAI Endpoint" , endpoint)
+
+  prompt=PromptTemplate.from_template("Tell me key achivments of {name} in 4 bulleted points")
+
+  llm=AzureOpenAI(deployment_name="gpt-35-turbo",max_tokens=2048)
 
   chain=prompt|llm
 
